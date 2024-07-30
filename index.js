@@ -10,7 +10,6 @@ const port = 4000;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
 const allowedOrigins = ['https://registration-form.icms2024.in','http://localhost:3000','https://my-admin.icms2024.in', 'https://my-admin.icms2024.in/admin/onlineBooking', 'https://my-admin.icms2024.in/admin/onlineUser/data/:id'];
 
