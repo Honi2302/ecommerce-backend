@@ -12,6 +12,25 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const allowedOrigins = ['https://registration-form.icms2024.in','http://localhost:3000','https://my-admin.icms2024.in', 'https://my-admin.icms2024.in/admin/onlineBooking', 'https://my-admin.icms2024.in/admin/onlineUser/data/:id'];
+
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'],
+    credentials: true
+}));
+
+app.options('*', (req, res) => {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, PUT, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200);
+});
+
 mongoose.connect(
   "mongodb+srv://psingh21022000:psingh21022000@ecommerce.toesshl.mongodb.net/e-commerce"
 );
